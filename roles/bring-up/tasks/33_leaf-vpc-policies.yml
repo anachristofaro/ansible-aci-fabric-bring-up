@@ -1,0 +1,16 @@
+---
+- name: add vpc protection group
+  cisco.aci.aci_switch_policy_vpc_protection_group:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    protection_group: "{{ item.name }}"
+    protection_group_id: "{{ item.id }}"
+    switch_1_id: "{{ item.node1 }}"
+    switch_2_id: "{{ item.node2 }}"
+    vpc_domain_policy: default
+    state: present
+  with_items:
+    ## input examples
+    #- { name: VPC-DOM-LF1001-1002, id: 1, node1: 1001, node2: 1002 }

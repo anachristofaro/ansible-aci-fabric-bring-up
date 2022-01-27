@@ -1,0 +1,3 @@
+---
+- name: BGP Route Reflector Setup
+  import_tasks: 61_bgp-route-reflector.yml

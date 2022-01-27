@@ -1,0 +1,9 @@
+---
+- name: Spine Policies Provisioning
+  import_tasks: 31_spine-policies.yml
+
+- name: Leaf Policies Provisioning
+  import_tasks: 32_leaf-policies.yml
+
+- name: Leaf VPC Policies Provisioning
+  import_tasks: 33_leaf-vpc-policies.yml

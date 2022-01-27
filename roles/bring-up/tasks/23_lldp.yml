@@ -1,0 +1,14 @@
+---
+- name: add lldp interface policy
+  cisco.aci.aci_interface_policy_lldp:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    lldp_policy: "{{ item.name }}"
+    receive_state: "{{ item.receive }}"
+    transmit_state: "{{ item.transmit }}"
+    state: present
+  with_items:
+    - { name: LLDP-ENABLED, receive: yes, transmit: yes }
+    - { name: LLDP-DISABLED, receive: no, transmit: no }

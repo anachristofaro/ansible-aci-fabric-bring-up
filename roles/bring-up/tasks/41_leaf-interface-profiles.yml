@@ -1,0 +1,14 @@
+---
+- name: add leaf interface profile
+  cisco.aci.aci_interface_policy_leaf_profile:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    interface_profile: "{{ item.profile }}"
+    state: present
+  with_items:
+    ## input examples
+    #- { profile: LF1001-INT-PROFILE }
+    #- { profile: LF1002-INT-PROFILE }
+    #- { profile: VPC-LF1001-1002-INT-PROFILE }

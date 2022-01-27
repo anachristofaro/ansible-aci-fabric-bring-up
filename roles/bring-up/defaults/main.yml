@@ -1,0 +1,5 @@
+---
+# Default
+apic_url: #<your_apic_address>
+aci_user: #<your_user>
+aci_password: #<your_password>

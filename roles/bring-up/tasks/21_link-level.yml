@@ -1,0 +1,18 @@
+---
+- name: add interface link-level policy
+  cisco.aci.aci_interface_policy_link_level:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    link_level_policy: "{{ item.name }}"
+    auto_negotiation: "{{ item.auto_negotiation }}"
+    speed: "{{ item.speed }}"
+    state: present
+  with_items:
+    - { name: 1G, auto_negotiation: no, speed: 1G }
+    - { name: 10G, auto_negotiation: no, speed: 10G }
+    - { name: 25G, auto_negotiation: no, speed: 25G }
+    - { name: 40G, auto_negotiation: no, speed: 40G }
+    - { name: 100G, auto_negotiation: no, speed: 100G }
+    - { name: AUTO, auto_negotiation: yes, speed: inherit }

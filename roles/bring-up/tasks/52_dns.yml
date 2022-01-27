@@ -1,0 +1,39 @@
+---
+- name: add dns server
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric/dnsp-default.json
+    method: post
+    content:
+      {
+        "dnsProfile" : {
+          "attributes" : {
+            "name" : "default"
+          },
+          "children" :
+          [{
+              "dnsDomain" : {
+                "attributes" : {
+                  "name": "{{ item.domain }}",
+                  "isDefault": "yes"
+                }
+              }
+            },
+            {
+              "dnsProv" : {
+                "attributes" : {
+                  "addr": "{{ item.dns }}",
+                  "preferred": "yes"
+                }
+              }
+            },
+
+          ]
+        }
+      }
+  with_items:
+    ## input examples
+    #- { dns: 8.8.8.8, domain: xpto.com.br }

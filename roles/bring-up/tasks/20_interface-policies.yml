@@ -1,0 +1,18 @@
+---
+- name: Link-Level Policies Provisioning
+  import_tasks: 21_link-level.yml
+
+- name: CDP Policies Provisioning
+  import_tasks: 22_cdp.yml
+
+- name: LLDP Policies Provisioning
+  import_tasks: 23_lldp.yml
+
+- name: MCP Policies Provisioning
+  import_tasks: 24_mcp.yml
+
+- name: Port-Channel Policies Provisioning
+  import_tasks: 25_port-channel.yml
+
+- name: Spanning-Tree Policies Provisioning
+  import_tasks: 26_spanning-tree.yml

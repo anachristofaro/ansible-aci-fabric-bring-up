@@ -1,0 +1,51 @@
+---
+- name: add bgp route reflector asn
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric/bgpInstP-default.json
+    method: post
+    content:
+      {
+        "bgpInstPol" : {
+          "attributes" : {
+            "name" : "default"
+          },
+          "children" :
+          [{
+              "bgpAsP" : {
+                "attributes" : {
+                  "asn" : "{{ item.asn }}"
+                },
+              }
+            },
+          ]
+        }
+      }
+  with_items:
+    ## input examples
+    #- { asn: 64000 }
+
+- name: add bgp route reflector nodes
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric/bgpInstP-default/rr.json
+    method: post
+    content:
+      {
+        "bgpRRNodePEp" : {
+          "attributes" : {
+            "id": "{{ item.node_id }}",
+            "podId": "{{ item.pod_id }}"
+          },
+        }
+      }
+  with_items:
+    ## input examples
+    #- { node_id: 101, pod_id: 1 }
+    #- { node_id: 102, pod_id: 1 }

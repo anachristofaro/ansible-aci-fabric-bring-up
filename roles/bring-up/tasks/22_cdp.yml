@@ -1,0 +1,13 @@
+---
+- name: add interface cdp policy
+  cisco.aci.aci_interface_policy_cdp:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    name: "{{ item.name }}"
+    admin_state: "{{ item.state }}"
+    state: present
+  with_items:
+    - { name: CDP-ENABLED, state: yes }
+    - { name: CDP-DISABLED, state: no }

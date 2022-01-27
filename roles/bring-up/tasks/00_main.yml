@@ -1,0 +1,21 @@
+---
+- name: Step 1 - Nodes and Out-of-Band
+  import_tasks: 10_provision.yml
+
+- name: Step 2 - Interface Policies
+  import_tasks: 20_interface-policies.yml
+
+- name: Step 3 - Switch Policies
+  import_tasks: 30_policies.yml
+
+- name: Step 4 - Profiles
+  import_tasks: 40_profiles.yml
+
+- name: Step 5 - Pod Settings
+  import_tasks: 50_pod.yml
+
+- name: Step 6 - System Settings
+  import_tasks: 60_system-settings.yml
+
+- name: Step 7 - Admin Settings
+  import_tasks: 70_admin.yml

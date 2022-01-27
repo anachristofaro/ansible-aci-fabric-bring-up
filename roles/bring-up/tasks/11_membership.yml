@@ -1,0 +1,20 @@
+---
+- name: add fabric node
+  cisco.aci.aci_fabric_node:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    serial: "{{ item.serial }}"
+    node_id: "{{ item.id }}"
+    switch: "{{ item.name }}"
+    pod_id: "{{ item.pod_id }}"
+    role: "{{ item.role }}"
+    state: present
+  with_items:
+    ## input examples
+    #- { pod_id: 1, role: spine, name: SWSP101, id: 101, serial: XXXXXXXX }
+    #- { pod_id: 1, role: spine, name: SWSP102, id: 102, serial: XXXXXXXX }
+    #- { pod_id: 1, role: leaf, name: SW1001, id: 1001, serial: XXXXXXXX }
+    #- { pod_id: 1, role: leaf, name: SW1002, id: 1002, serial: XXXXXXXX }
+  ignore_errors: yes

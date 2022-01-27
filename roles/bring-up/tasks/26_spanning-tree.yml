@@ -1,0 +1,22 @@
+---
+- name: add spanning-tree interface policy
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/infra.json
+    method: post
+    content:
+      {
+        "stpIfPol" : {
+          "attributes" : {
+            "name" : "{{ item.name }}",
+            "ctrl" : "{{ item.control }}"
+          },
+        }
+      }
+  with_items:
+    - { name: BPDU-ALLOW, control: }
+    - { name: BPDU-FILTER, control: bpdu-filter }
+    - { name: BPDU-GUARD, control: bpdu-guard }

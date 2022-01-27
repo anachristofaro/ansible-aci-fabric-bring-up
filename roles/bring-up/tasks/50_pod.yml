@@ -1,0 +1,12 @@
+---
+- name: NTP Setup
+  import_tasks: 51_ntp.yml
+
+- name: DNS Setup
+  import_tasks: 52_dns.yml
+
+- name: Pod Policies Provisioning
+  import_tasks: 53_pod-policy-group.yml
+
+- name: Pod Profiles Provisioning
+  import_tasks: 54_pod-profile.yml

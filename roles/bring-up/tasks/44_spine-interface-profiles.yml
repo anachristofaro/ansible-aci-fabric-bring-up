@@ -1,0 +1,21 @@
+---
+- name: add spine interface profile
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/infra.json
+    method: post
+    content:
+      {
+        "infraSpAccPortP" : {
+          "attributes" : {
+            "name" : "{{ item.name }}"
+          }
+        }
+      }
+  with_items:
+    ## input examples
+    #- { name: SP101-INT-PROFILE } 
+    #- { name: SP102-INT-PROFILE }

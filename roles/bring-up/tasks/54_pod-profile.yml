@@ -1,0 +1,36 @@
+---
+- name: add pod profile
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric.json
+    method: post
+    content:
+      {
+        "fabricPodP" : {
+          "attributes" : {
+            "name" : "POD-PROFILE"
+          },
+          "children" :
+          [{
+              "fabricPodS" : {
+                "attributes" : {
+                  "name" : "POD-SELECTOR",
+                  "type": "ALL"
+                },
+                "children" : [
+                    {
+                      "fabricRsPodPGrp" : {
+                        "attributes" : {
+                          "tDn": "uni/fabric/funcprof/podpgrp-POD-PG"
+                        },
+                      }
+                    }
+                ]
+              }
+            },
+          ]
+        }
+      }

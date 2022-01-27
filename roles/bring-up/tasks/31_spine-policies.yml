@@ -1,0 +1,33 @@
+---
+- name: add spine policy group
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/infra/funcprof.json
+    method: post
+    content:
+      {
+        "infraSpineAccNodePGrp" : {
+          "attributes" : {
+            "name" : "SP-PG"
+          },
+          "children" :
+          [{
+              "infraRsSpinePGrpToCdpIfPol" : {
+                "attributes" : {
+                  "tnCdpIfPolName" : "CDP-ENABLED"
+                }
+              }
+            },
+            {
+              "infraRsSpinePGrpToLldpIfPol" : {
+                "attributes" : {
+                  "tnLldpIfPolName" : "LLDP-ENABLED"
+                }
+              }
+            }
+          ]
+        }
+      }

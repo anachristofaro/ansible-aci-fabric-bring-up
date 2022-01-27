@@ -1,0 +1,18 @@
+---
+- name: Leaf Interface Profiles Provisioning
+  import_tasks: 41_leaf-interface-profiles.yml
+
+- name: Leaf Switch Profiles Provisioning
+  import_tasks: 42_leaf-switch-profiles.yml
+
+- name: Leaf Interface x Switch Profiles Binding
+  import_tasks: 43_leaf-binding-int-sw-profiles.yml
+
+- name: Spine Interface Profiles Provisioning
+  import_tasks: 44_spine-interface-profiles.yml
+
+- name: Spine Switch Profiles Provisioning
+  import_tasks: 45_spine-switch-profiles.yml
+
+- name: Spine Interface x Switch Profiles Binding
+  import_tasks: 46_spine-binding-int-sw-profiles.yml

@@ -1,0 +1,10 @@
+---
+- name: Cisco ACI Bring-Up
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Run tasks/00_main.yml
+      import_role:
+        name: bring-up
+        tasks_from: 00_main

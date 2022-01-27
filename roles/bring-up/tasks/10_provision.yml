@@ -1,0 +1,9 @@
+---
+- name: Nodes Provisioning
+  import_tasks: 11_membership.yml
+
+- name: Out-of-Band Provisioning
+  import_tasks: 12_oob.yml
+
+- name: Firmware and Maintenance Group Provisioning
+  import_tasks: 13_firmware-group.yml

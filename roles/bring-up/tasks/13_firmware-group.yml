@@ -1,0 +1,86 @@
+---
+- name: add firmware policy
+  cisco.aci.aci_firmware_policy:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    name: aci-n9000-system.14.2.7f.bin
+    version: n9000-14.2(7f)
+    ignoreCompat: False
+    state: present
+
+- name: add firmware group
+  cisco.aci.aci_firmware_group:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    group: "{{ item.firmware_group }}"
+    firmwarepol: aci-n9000-system.14.2.7f.bin
+    state: present
+  with_items:
+    ## input examples
+    #- { firmware_group: P01-SP }
+    #- { firmware_group: P01-LF }
+
+- name: bind node to firmware group
+  cisco.aci.aci_firmware_group_node:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    group: "{{ item.firmware_group }}"
+    node: "{{ item.node }}"
+    state: present
+  with_items:
+    ## input examples
+    #- { firmware_group: P01-SP, node: 101 }
+    #- { firmware_group: P01-SP, node: 102 }
+    #- { firmware_group: P01-LF, node: 1001 }
+    #- { firmware_group: P01-LF, node: 1002 }
+  
+- name: add maintenance policy
+  cisco.aci.aci_maintenance_policy:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    name: "{{ item.maintenance_group }}"
+    scheduler: simpleScheduler
+    runmode: pauseNever
+    state: present
+  with_items:
+    ## input examples
+    #- { maintenance_group: P01-SP }
+    #- { maintenance_group: P01-LF }
+
+- name: add maintenance group
+  cisco.aci.aci_maintenance_group:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    group: "{{ item.maintenance_group }}"
+    policy: "{{ item.maintenance_group }}"
+    state: present
+  with_items:
+    ## input examples
+    #- { maintenance_group: P01-SP }
+    #- { maintenance_group: P01-LF }
+
+- name: bind node to maintenance group
+  cisco.aci.aci_maintenance_group_node:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    group: "{{ item.maintenance_group }}"
+    node: "{{ item.node }}"
+    state: present
+  with_items:
+    ## input examples
+    #- { maintenance_group: P01-SP, node: 101 }
+    #- { maintenance_group: P01-SP, node: 101 }
+    #- { maintenance_group: P01-LF, node: 1001 }
+    #- { maintenance_group: P01-LF, node: 1001 }

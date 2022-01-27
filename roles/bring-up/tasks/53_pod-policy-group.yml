@@ -1,0 +1,17 @@
+---
+- name: add pod policy group
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric/funcprof.json
+    method: post
+    content:
+      {
+        "fabricPodPGrp" : {
+          "attributes" : {
+            "name" : "POD-PG"
+          },
+        }
+      }

@@ -1,0 +1,18 @@
+---
+- name: add port-channel interface policy
+  cisco.aci.aci_interface_policy_port_channel:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    port_channel: "{{ item.name }}"
+    mode: "{{ item.mode }}"
+    suspend_individual: "{{ item.suspend_individual }}"
+    graceful_convergence: "{{ item.graceful_convergence }}"
+    fast_select: "{{ item.fast_select }}"
+    state: present
+  with_items:
+    - { name: LACP-ACTIVE, mode: active, suspend_individual: yes, graceful_convergence: yes, fast_select: yes }
+    - { name: LACP-PASSIVE,  mode: passive, suspend_individual: yes, graceful_convergence: yes, fast_select: yes }
+    - { name: MAC-PINNING, mode: mac-pin, suspend_individual: no, graceful_convergence: no, fast_select: no }
+    - { name: MODE-ON, mode: off, suspend_individual: no, graceful_convergence: no, fast_select: no }

@@ -1,0 +1,25 @@
+---
+- name: add tacacs plus provider
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/userext/tacacsext.json
+    method: post
+    content:
+      {
+        "aaaTacacsPlusProvider" : {
+          "attributes" : {
+            "name" : "{{ item.name }}",
+            "port": "49",
+            "timeout": "5",
+            "retries": "1",
+            "monitorServer": "disabled",
+            "authProtocol": "pap"
+          },
+        }
+      }
+  with_items:
+    ## input examples
+    #- { name: 1.1.1.1 }

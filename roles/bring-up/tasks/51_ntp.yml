@@ -1,0 +1,30 @@
+---
+- name: add ntp server
+  cisco.aci.aci_rest:
+    validate_certs: no
+    host: "{{ apic_url }}"
+    username: "{{ aci_user }}"
+    password: "{{ aci_password }}"
+    path: /api/node/mo/uni/fabric/time-default.json
+    method: post
+    content:
+      {
+        "datetimeNtpProv" : {
+          "attributes" : {
+            "name" : "{{ item.name }}",
+            "preferred": "{{ item.preferred }}"
+          },
+          "children" :
+          [{
+              "datetimeRsNtpProvToEpg" : {
+                "attributes" : {
+                  "tDn": "uni/tn-mgmt/mgmtp-default/oob-default"
+                }
+              }
+            }
+          ]
+        }
+      }
+  with_items:
+    ## input examples
+    #- { name: 201.49.148.135, preferred: "yes" }
