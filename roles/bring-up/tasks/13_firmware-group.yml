@@ -81,6 +81,6 @@
   with_items:
     ## input examples
     #- { maintenance_group: P01-SP, node: 101 }
-    #- { maintenance_group: P01-SP, node: 101 }
+    #- { maintenance_group: P01-SP, node: 102 }
     #- { maintenance_group: P01-LF, node: 1001 }
-    #- { maintenance_group: P01-LF, node: 1001 }
+    #- { maintenance_group: P01-LF, node: 1002 }
