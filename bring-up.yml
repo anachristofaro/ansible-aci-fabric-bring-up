@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   tasks:
-  - name: Creating an empty file
-    file:
-      path: /home/ec2-user/file.txt
+  - name: Touch the same file, but add/remove some permissions
+    ansible.builtin.file:
+      path: /etc/foo.conf
       state: touch
