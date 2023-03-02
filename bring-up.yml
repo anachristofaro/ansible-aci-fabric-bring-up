@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Run tasks/00_main.yml
-      import_role:
-        name: bring-up
-        tasks_from: 00_main
+  - name: Creating an empty file
+    file:
+      path: "/home/ec2-user/file.txt"
+      state: touch
