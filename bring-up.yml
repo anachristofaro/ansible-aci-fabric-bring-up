@@ -5,9 +5,9 @@
   gather_facts: false
   tasks:
     - name: Creating an empty file
-    file:
-      path: /home/ec2-user/file.txt
-      state: touch
+      file:
+        path: /home/ec2-user/file.txt
+        state: touch
     #- name: Run tasks/00_main.yml
     #  import_role:
     #    name: bring-up
