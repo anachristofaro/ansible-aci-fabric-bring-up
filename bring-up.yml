@@ -4,7 +4,7 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Creating an empty file now
+    - name: Creating an empty file
       file:
-        path: /home/ec2-user/file4.txt
+        path: /home/ec2-user/file5.txt
         state: touch
