@@ -6,5 +6,5 @@
   tasks:
     - name: Creating an empty file
       file:
-        path: /home/ec2-user/file3.txt
+        path: /home/ec2-user/file4.txt
         state: touch
