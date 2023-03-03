@@ -8,4 +8,3 @@
       file:
         path: /home/ec2-user/file2.txt
         state: touch
-
